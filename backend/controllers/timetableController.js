@@ -132,9 +132,10 @@ exports.generateTimetableAI = async (req, res) => {
 
                     const newEntry = new Timetable({
                         batch_id: entry.batch_id,
+                        section: entry.section,
                         subject_id: entry.subject_id,
                         faculty_id: entry.faculty_id,
-                        classroom_id: classrooms[0]?._id,
+                        classroom_id: entry.classroom_id,
                         day: entry.day,
                         slot: entry.slot
                     })

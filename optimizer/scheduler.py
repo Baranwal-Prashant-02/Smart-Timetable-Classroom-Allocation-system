@@ -37,7 +37,7 @@ try:
                 timetable[(b,d,s)] = model.NewIntVar(0, len(subjects)-1, f"t_{b}_{d}_{s}")
                 room_assignment[(b,d,s)] = model.NewIntVar(0, len(classrooms)-1, f"room_{b}_{d}_{s}")
 
-    # ================= SUBJECT HOURS (PRIORITY BASED) =================
+    # ================= SUBJECT HOURS =================
     for b in range(len(batches)):
         for subj_index, subj in enumerate(subjects):
 
@@ -54,11 +54,10 @@ try:
                     model.Add(timetable[(b,d,s)] != subj_index).OnlyEnforceIf(is_same.Not())
                     occ.append(is_same)
 
-            # 🔥 LAB = STRICT
             if subj.get("type") == "lab":
                 model.Add(sum(occ) == required)
             else:
-                # THEORY = FLEXIBLE
+                model.Add(sum(occ) >= 1)
                 model.Add(sum(occ) <= required)
 
     # ================= BALANCE =================
@@ -178,7 +177,6 @@ try:
                 model.Add(sum(occ) <= 1)
 
     # ================= CLASSROOM CAPACITY =================
-
     for b in range(len(batches)):
         batch_strength = batches[b].get("strength", 0)
 
@@ -191,9 +189,7 @@ try:
                     if room_capacity < batch_strength:
                         model.Add(room_assignment[(b,d,s)] != r)
 
-
     # ================= ROOM TYPE MATCHING =================
-
     for b in range(len(batches)):
         for d in range(len(days)):
             for s in range(len(slots)):
@@ -211,14 +207,23 @@ try:
                         model.Add(timetable[(b,d,s)] == subj_index).OnlyEnforceIf(is_subj)
                         model.Add(timetable[(b,d,s)] != subj_index).OnlyEnforceIf(is_subj.Not())
 
-                        # ❌ LAB subject cannot go in theory room
                         if subj.get("type") == "lab" and room_type != "lab":
                             model.Add(room_assignment[(b,d,s)] != r).OnlyEnforceIf(is_subj)
 
-                        # ❌ THEORY subject should not go in lab room
                         if subj.get("type") == "theory" and room_type == "lab":
                             model.Add(room_assignment[(b,d,s)] != r).OnlyEnforceIf(is_subj)
 
+    # ================= ✅ FIX: NO ROOM FOR FREE SLOT =================
+    for b in range(len(batches)):
+        for d in range(len(days)):
+            for s in range(len(slots)):
+
+                is_free = model.NewBoolVar(f"is_free_room_{b}_{d}_{s}")
+
+                model.Add(timetable[(b,d,s)] == FREE_INDEX).OnlyEnforceIf(is_free)
+                model.Add(timetable[(b,d,s)] != FREE_INDEX).OnlyEnforceIf(is_free.Not())
+
+                model.Add(room_assignment[(b,d,s)] == 0).OnlyEnforceIf(is_free)
 
     # ================= OBJECTIVE =================
     free_penalty = []
@@ -233,7 +238,6 @@ try:
 
                 free_penalty.append(is_free)
 
-    # 🔥 LAB PRIORITY HIGHER
     model.Minimize(sum(free_penalty) * 3 + sum(lab_penalty) * 100)
 
     # ================= SOLVE =================

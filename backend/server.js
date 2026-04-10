@@ -38,9 +38,27 @@ app.listen(5000, ()=>{
     console.log("Server running on port 5000")
 })
 
-//to run the backend server 
+//to run the backend server in different terminal 
 // use:-  "node backend/server.js"
 
 
-// to run the frontend server 
+// to run the frontend server  at different terminal
 //use :- "cd frontend"  then "npm start"
+// both 
+
+/*
+we must start both separately
+
+backend:👉 Handles:
+Database
+AI (Python)
+API routes
+
+
+frontend :👉 Handles
+UI
+Buttons
+Tables
+
+“We use a decoupled architecture where frontend and backend run as independent services, allowing scalability, flexibility, and easier maintenance.”
+*/

@@ -7,6 +7,7 @@ const TimetableSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Batch"
     },
+    section: String,
     subject_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Subject"
