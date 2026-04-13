@@ -23,3 +23,12 @@ exports.deleteFaculty = async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 }
+
+exports.getAllFaculty = async (req, res) => {
+  try {
+    const faculty = await Faculty.find()
+    res.json(faculty)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}

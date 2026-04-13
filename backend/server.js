@@ -6,6 +6,7 @@ const facultyRoutes = require("./routes/facultyRoutes")
 const subjectRoutes = require("./routes/subjectRoutes")
 const classroomRoutes = require("./routes/classroomRoutes")
 const batchRoutes = require("./routes/batchRoutes")
+const authRoutes = require("./routes/authRoutes")
 
 
 const timetableRoutes = require("./routes/timetableRoutes")
@@ -26,9 +27,9 @@ app.use("/classrooms", classroomRoutes)
 
 app.use("/batches", batchRoutes)
 
-
-
 app.use("/timetable", timetableRoutes)
+
+app.use("/auth", authRoutes)
 
 app.get("/", (req,res)=>{
     res.send("Smart Timetable Scheduler API Running")

@@ -16,3 +16,8 @@ export const getClassrooms = async () => {
   const res = await fetch("http://localhost:5000/classroom/all")
   return res.json()
 }
+
+export const getFaculty = async () => {
+  const res = await fetch("http://localhost:5000/faculty/all")
+  return res.json()
+}

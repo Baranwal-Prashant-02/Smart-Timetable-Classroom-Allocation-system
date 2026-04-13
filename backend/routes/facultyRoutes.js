@@ -6,5 +6,6 @@ const facultyController = require("../controllers/facultyController")
 router.post("/add", facultyController.addFaculty)
 router.get("/all", facultyController.getFaculty)
 router.delete("/delete/:id", facultyController.deleteFaculty)
+router.get("/all", facultyController.getAllFaculty)
 
 module.exports = router

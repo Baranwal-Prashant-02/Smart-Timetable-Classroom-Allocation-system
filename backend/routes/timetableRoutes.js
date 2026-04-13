@@ -11,7 +11,7 @@
 
 const express = require("express")
 const router = express.Router()
-
+const authMiddleware = require("../middleware/authMiddleware")
 const timetableController = require("../controllers/timetableController")
 const Timetable = require("../models/Timetable")   // ✅ ADD THIS
 
