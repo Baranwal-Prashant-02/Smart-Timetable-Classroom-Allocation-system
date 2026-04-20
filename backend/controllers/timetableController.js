@@ -12,65 +12,65 @@ const slots = [1,2,3,4,5]
 
 
 // ================= BASIC AI =================
-exports.generateTimetable = async (req, res) => {
-    try {
-        await Timetable.deleteMany()
+// exports.generateTimetable = async (req, res) => {
+//     try {
+//         await Timetable.deleteMany()
 
-        const batches = await Batch.find()
-        const subjects = await Subject.find()
-        const classrooms = await Classroom.find()
+//         const batches = await Batch.find()
+//         const subjects = await Subject.find()
+//         const classrooms = await Classroom.find()
 
-        let timetable = []
+//         let timetable = []
 
-        for (let batch of batches) {
-            for (let subject of subjects) {
+//         for (let batch of batches) {
+//             for (let subject of subjects) {
 
-                for (let i = 0; i < subject.hours_per_week; i++) {
+//                 for (let i = 0; i < subject.hours_per_week; i++) {
 
-                    let assigned = false
+//                     let assigned = false
 
-                    while (!assigned) {
+//                     while (!assigned) {
 
-                        let day = days[Math.floor(Math.random() * days.length)]
-                        let slot = slots[Math.floor(Math.random() * slots.length)]
+//                         let day = days[Math.floor(Math.random() * days.length)]
+//                         let slot = slots[Math.floor(Math.random() * slots.length)]
 
-                        let room = classrooms[Math.floor(Math.random() * classrooms.length)]
+//                         let room = classrooms[Math.floor(Math.random() * classrooms.length)]
 
-                        const conflict = await Timetable.findOne({
-                            $or: [
-                                { day, slot, classroom_id: room._id },
-                                { day, slot, faculty_id: subject.faculty_id },
-                                { day, slot, batch_id: batch._id },
-                                { day, batch_id: batch._id, subject_id: subject._id }
-                            ]
-                        })
+//                         const conflict = await Timetable.findOne({
+//                             $or: [
+//                                 { day, slot, classroom_id: room._id },
+//                                 { day, slot, faculty_id: subject.faculty_id },
+//                                 { day, slot, batch_id: batch._id },
+//                                 { day, batch_id: batch._id, subject_id: subject._id }
+//                             ]
+//                         })
 
-                        if (!conflict) {
-                            const entry = new Timetable({
-                                batch_id: batch._id,
-                                subject_id: subject._id,
-                                faculty_id: subject.faculty_id,
-                                classroom_id: room._id,
-                                day,
-                                slot
-                            })
+//                         if (!conflict) {
+//                             const entry = new Timetable({
+//                                 batch_id: batch._id,
+//                                 subject_id: subject._id,
+//                                 faculty_id: subject.faculty_id,
+//                                 classroom_id: room._id,
+//                                 day,
+//                                 slot
+//                             })
 
-                            await entry.save()
-                            timetable.push(entry)
+//                             await entry.save()
+//                             timetable.push(entry)
 
-                            assigned = true
-                        }
-                    }
-                }
-            }
-        }
+//                             assigned = true
+//                         }
+//                     }
+//                 }
+//             }
+//         }
 
-        res.json({ message: "Basic Timetable Generated", timetable })
+//         res.json({ message: "Basic Timetable Generated", timetable })
 
-    } catch (err) {
-        res.status(500).json({ error: err.message })
-    }
-}
+//     } catch (err) {
+//         res.status(500).json({ error: err.message })
+//     }
+// }
 
 
 

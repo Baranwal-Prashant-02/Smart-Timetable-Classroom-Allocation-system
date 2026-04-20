@@ -46,3 +46,8 @@ export const addFaculty = async (facultyData) => {
 
   return res.json()
 }
+
+export const getBatches = async () => {
+  const res = await fetch("http://localhost:5000/batches/all")
+  return res.json()
+}

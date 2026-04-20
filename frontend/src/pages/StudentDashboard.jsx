@@ -32,11 +32,7 @@ const StudentDashboard = () => {
     getTimetable().then(setData)
   }, [])
 
-  // 🔥 logout
-  const handleLogout = () => {
-    localStorage.clear()
-    window.location.reload()
-  }
+
 
   // 🔥 filter by section
   const filteredData = data.filter(
@@ -50,12 +46,7 @@ const StudentDashboard = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Student Timetable</h2>
 
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
+        
       </div>
 
       {/* DROPDOWN */}

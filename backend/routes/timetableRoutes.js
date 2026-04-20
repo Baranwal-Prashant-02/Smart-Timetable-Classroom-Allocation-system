@@ -16,7 +16,7 @@ const timetableController = require("../controllers/timetableController")
 const Timetable = require("../models/Timetable")   // ✅ ADD THIS
 
 // existing routes
-router.get("/generate", timetableController.generateTimetable)
+//router.get("/generate", timetableController.generateTimetable) //it is for basic timetable generator 
 router.get("/generate-ai", timetableController.generateTimetableAI)
 
 // 🔥 ADD THIS NEW ROUTE (IMPORTANT)

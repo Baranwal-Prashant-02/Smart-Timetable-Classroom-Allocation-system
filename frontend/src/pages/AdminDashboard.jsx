@@ -40,10 +40,7 @@ const AdminDashboard = () => {
 
 
   // 🔥 logout here (better readability)
-  const handleLogout = () => {
-    localStorage.clear()
-    window.location.reload()
-  }
+
 
   const handleGenerate = async () => {
     await generateTimetable()
@@ -88,12 +85,6 @@ const AdminDashboard = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Admin Dashboard</h2>
                 
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
       </div>
 
       {/* 🔥 GENERATE + ADMIN BUTTONS IN ONE LINE */}

@@ -65,9 +65,34 @@ function App() {
         style={{
           marginLeft: role && page !== "login" ? "220px" : "0px",
           padding: "20px",
-          width: "100%"
+          width: "100%",
+          position: "relative" // 🔥 important
         }}
       >
+
+        {/* 🔥 GLOBAL LOGOUT BUTTON */}
+        {role && page !== "login" && (
+          <button
+            onClick={() => {
+              localStorage.removeItem("role")
+              window.location.reload()
+            }}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              background: "#ef4444",
+              color: "white",
+              padding: "10px 16px",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer"
+            }}
+          >
+            Logout
+          </button>
+        )}
+
         {renderPage()}
       </div>
 
