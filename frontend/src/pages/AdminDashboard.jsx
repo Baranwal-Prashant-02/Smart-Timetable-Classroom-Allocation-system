@@ -24,8 +24,13 @@
 import React, { useEffect, useState } from "react"
 import { getTimetable, generateTimetable } from "../services/api"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts"
+import FacultyPanel from "../components/FacultyPanel"
+import SubjectPanel from "../components/SubjectPanel"
+import ClassroomPanel from "../components/ClassroomPanel"
+import BatchPanel from "../components/BatchPanel"
 
 const AdminDashboard = () => {
+  const [activePanel, setActivePanel] = useState("")
 
   const [data, setData] = useState([])
 
@@ -82,7 +87,7 @@ const AdminDashboard = () => {
 
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Admin Dashboard</h2>
-
+                
         <button
           onClick={handleLogout}
           className="bg-red-500 text-white px-4 py-2 rounded"
@@ -91,12 +96,52 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      <button
+      {/* 🔥 GENERATE + ADMIN BUTTONS IN ONE LINE */}
+        <div className="flex items-center gap-4 mb-6">
+
+          <button
+            onClick={handleGenerate}
+            className="bg-blue-500 text-white px-4 py-2 rounded whitespace-nowrap"
+          >
+            Generate Timetable
+          </button>
+
+          <button 
+            onClick={() => setActivePanel(activePanel === "faculty" ? "" : "faculty")}
+            className="bg-green-500 text-white px-3 py-2 rounded whitespace-nowrap">
+            Manage Faculty
+          </button>
+
+          <button 
+            onClick={() => setActivePanel(activePanel === "subjects" ? "" : "subjects")}
+            className="bg-purple-500 text-white px-3 py-2 rounded whitespace-nowrap">
+            Manage Subjects
+          </button>
+
+          <button 
+            onClick={() => setActivePanel(activePanel === "classrooms" ? "" : "classrooms")}
+            className="bg-yellow-500 text-white px-3 py-2 rounded whitespace-nowrap">
+            Manage Classrooms
+          </button>
+
+          <button 
+            onClick={() => setActivePanel(activePanel === "batches" ? "" : "batches")}
+            className="bg-pink-500 text-white px-3 py-2 rounded whitespace-nowrap">
+            Manage Batches
+          </button>
+
+        </div>
+      {activePanel === "faculty" && <FacultyPanel />}  
+      {activePanel === "subjects" && <SubjectPanel />}
+      {activePanel === "classrooms" && <ClassroomPanel />}
+      {activePanel === "batches" && <BatchPanel />}
+
+      {/* <button
         onClick={handleGenerate}
         className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
       >
         Generate Timetable
-      </button>
+      </button> */}
 
       {/* ================= FACULTY LOAD ================= */}
       <h3 className="text-xl mb-3">📊 Faculty Load</h3>

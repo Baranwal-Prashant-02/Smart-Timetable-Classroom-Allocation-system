@@ -37,8 +37,8 @@ exports.getSubjects = async (req, res) => {
     const formatted = subjects.map(sub => ({
         _id: sub._id,
         subject_name: sub.subject_name,
-        faculty_id: sub.faculty_id._id,
-        faculty_name: sub.faculty_id.name,
+        faculty_id: sub.faculty_id?._id,
+        faculty_name: sub.faculty_id?.name || "Unknown",
         hours_per_week: sub.hours_per_week,
         type: sub.type
     }))

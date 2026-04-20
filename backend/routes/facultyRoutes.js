@@ -1,3 +1,15 @@
+// const express = require("express")
+// const router = express.Router()
+
+// const facultyController = require("../controllers/facultyController")
+
+// router.post("/add", facultyController.addFaculty)
+// router.get("/all", facultyController.getFaculty)
+// router.delete("/delete/:id", facultyController.deleteFaculty)
+// router.get("/all", facultyController.getAllFaculty)
+
+// module.exports = router
+
 const express = require("express")
 const router = express.Router()
 
@@ -5,7 +17,6 @@ const facultyController = require("../controllers/facultyController")
 
 router.post("/add", facultyController.addFaculty)
 router.get("/all", facultyController.getFaculty)
-router.delete("/delete/:id", facultyController.deleteFaculty)
-router.get("/all", facultyController.getAllFaculty)
+router.delete("/:id", facultyController.deleteFaculty) // ✅ FIXED
 
 module.exports = router

@@ -1,11 +1,47 @@
 const Classroom = require("../models/Classroom")
 
 // Add Classroom
+// exports.addClassroom = async (req, res) => {
+//     try {
+//         const classroom = new Classroom(req.body)
+//         await classroom.save()
+//         res.json(classroom)
+//     } catch (err) {
+//         res.status(500).json({ error: err.message })
+//     }
+// }
+
 exports.addClassroom = async (req, res) => {
     try {
-        const classroom = new Classroom(req.body)
+        const { room_no, capacity, type } = req.body
+
+        // ✅ VALIDATION
+        if (!room_no || !capacity || !type) {
+            return res.status(400).json({ error: "All fields required" })
+        }
+
+        // 🔥 CHECK DUPLICATE ROOM (ADD HERE)
+        const exists = await Classroom.findOne({ room_no })
+        if (exists) {
+            return res.status(400).json({ error: "Room already exists ❌" })
+        }
+
+        // ✅ VALID TYPE
+        if (!["theory", "lab", "smart"].includes(type)) {
+            return res.status(400).json({ error: "Invalid classroom type" })
+        }
+
+        // ✅ SAVE
+        const classroom = new Classroom({
+            room_no,
+            capacity,
+            type
+        })
+
         await classroom.save()
+
         res.json(classroom)
+
     } catch (err) {
         res.status(500).json({ error: err.message })
     }

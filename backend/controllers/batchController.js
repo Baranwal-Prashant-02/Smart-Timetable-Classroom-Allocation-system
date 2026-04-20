@@ -3,9 +3,30 @@ const Batch = require("../models/Batch")
 // Add Batch
 exports.addBatch = async (req, res) => {
     try {
-        const batch = new Batch(req.body)
+        const { course, year, section, strength } = req.body
+
+        // ✅ VALIDATION
+        if (!course || !year || !section || !strength) {
+            return res.status(400).json({ error: "All fields required" })
+        }
+
+        // 🔥 PREVENT DUPLICATE BATCH
+        const exists = await Batch.findOne({ course, year, section })
+        if (exists) {
+            return res.status(400).json({ error: "Batch already exists ❌" })
+        }
+
+        const batch = new Batch({
+            course,
+            year,
+            section,
+            strength
+        })
+
         await batch.save()
+
         res.json(batch)
+
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
