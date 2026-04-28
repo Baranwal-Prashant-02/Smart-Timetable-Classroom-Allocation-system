@@ -1,0 +1,26 @@
+{
+  "name": "smart-timetable-and-classroom-allocation-system",
+  "version": "1.0.0",
+  "description": "This is my major project of Btech. build using MERN and Python (OR-Tools)",
+  "main": "index.js",
+  "scripts": {
+  "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+  "frontend": "cd frontend && npm start",
+  "backend": "cd backend && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baranwal-Prashant-02/Smart-Timetable-Classroom-Allocation-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Baranwal-Prashant-02/Smart-Timetable-Classroom-Allocation-system/issues"
+  },
+  "homepage": "https://github.com/Baranwal-Prashant-02/Smart-Timetable-Classroom-Allocation-system#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
+
