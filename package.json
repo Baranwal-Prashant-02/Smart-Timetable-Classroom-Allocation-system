@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
   "start": "concurrently \"npm run backend\" \"npm run frontend\"",
-  "frontend": "cd frontend && npm start",
-  "backend": "cd backend && node server.js"
+  "frontend": "npm start --prefix frontend",
+  "backend": "node backend/server.js"
   },
   "repository": {
     "type": "git",
