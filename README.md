@@ -99,7 +99,7 @@ We use a **Constraint Satisfaction Problem (CSP)** approach:
 
 ## 🏗️ Project file Structure
 
-
+```
 Smart Timetable & Classroom Allocation System
 │
 ├── backend/
@@ -169,7 +169,7 @@ Smart Timetable & Classroom Allocation System
 │
 ├── package.json            # Root (for running both servers together)
 └── README.md
-
+```
 ---
 
 ## 🧩 Modules
@@ -283,7 +283,7 @@ The system minimizes:
 ## 🏗️ Architecture Diagram
 
 🔷 High-Level Flow
-
+```
           ┌───────────────┐
           │   Frontend    │
           │  (React UI)   │
@@ -312,7 +312,7 @@ Controllers   Middleware     Routes
         │ Python Optimizer   │
         │ (OR-Tools Engine)  │
         └────────────────────┘
-
+```
 
 `The system follows a layered architecture where the frontend is responsible for UI, the backend handles business logic and authentication, and the optimization logic is handled separately using Python OR-Tools. This separation ensures scalability, maintainability, and high performance.`
 
@@ -372,6 +372,7 @@ This system is designed to scale:
 ---
 
 ## 🔄 End-to-End Data Flow of System
+```
 Admin clicks "Generate Timetable"
         ↓
 Frontend sends request
@@ -390,6 +391,7 @@ Returned to frontend
         ↓
 Displayed in UI
 
+```
 
 ---
 
