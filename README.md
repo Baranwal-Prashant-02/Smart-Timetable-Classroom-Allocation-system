@@ -283,7 +283,10 @@ The system minimizes:
 ## 🏗️ Architecture Diagram
 
 🔷 High-Level Flow
+<<<<<<< HEAD
 ```
+=======
+>>>>>>> 7678e83ad8ba90bc874327ee8040018f7de1e51d
           ┌───────────────┐
           │   Frontend    │
           │  (React UI)   │
