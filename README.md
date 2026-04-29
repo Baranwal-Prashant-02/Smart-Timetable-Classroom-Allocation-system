@@ -210,7 +210,7 @@ The system uses OR-Tools CP-SAT solver.
 
 ### Flow:
 
-
+```
 Input Data (DB)
 ↓
 Constraint Processing
@@ -222,7 +222,7 @@ Conflict Checking
 Final Timetable
 ↓
 Stored in DB
-
+```
 
 ### Key Constraints (from implementation) :contentReference[oaicite:1]{index=1}
 
@@ -283,10 +283,7 @@ The system minimizes:
 ## 🏗️ Architecture Diagram
 
 🔷 High-Level Flow
-<<<<<<< HEAD
 ```
-=======
->>>>>>> 7678e83ad8ba90bc874327ee8040018f7de1e51d
           ┌───────────────┐
           │   Frontend    │
           │  (React UI)   │
